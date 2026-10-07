@@ -21,6 +21,7 @@ class _ListaClientesState extends State<ListaClientes> {
 
   Future<void> _carregar() async {
     final lista = await DatabaseHelper.instance.listar();
+    debugPrint(lista.map((c) => c.toMap()).toList().toString());
     setState(() => _clientes = lista);
   }
 
@@ -53,7 +54,9 @@ class _ListaClientesState extends State<ListaClientes> {
                 final c = _clientes[i];
                 return ListTile(
                   title: Text(c.nome),
-                  subtitle: Text('${c.rua}, ${c.bairro}\n${c.cidade} - ${c.estado}'),
+                  subtitle: Text(
+                    '${c.rua}, ${c.bairro}\n${c.cidade} - ${c.estado}',
+                  ),
                   isThreeLine: true,
                   onTap: () => _abrirForm(c),
                   trailing: IconButton(
